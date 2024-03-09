@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """the base module"""
 from datetime import datetime
+import uuid
 
 
 class BaseModel:
+
     """the base class"""
 
     def __init__(self):
