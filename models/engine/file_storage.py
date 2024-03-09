@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """file storage modules"""
-from models.base_model import BaseModel
 import datetime
 import json
 import os
@@ -18,7 +17,7 @@ class FileStorage:
 
     def new(self, obj):
         """Sets in __objects the obj with key <obj class name>.id."""
-        key = obj.__class__.__name__
+        key = type(obj).__name__
         FileStorage.__objects["{}.{}".format(key, obj.id)] = obj
 
     def save(self):
