@@ -35,8 +35,10 @@ destroy: Deletes an instance based on class name and ID and saves the changes in
 all: Prints string representations of all instances based on class name.
 update: Updates an instance's attribute based on class name and ID and saves changes to the JSON file.
 count: Retrieves the number of instances of a class.
-How to Start:
-Clone the repository from GitHub: git clone https://github.com/jzamora5/AirBnB_clone.git
+
+#How to Start:
+
+Clone the repository from GitHub: git clone https://github.com/Bbr011/AirBnB_clone.git
 Navigate to the cloned directory: cd AirBnB_clone
 Run the console program: ./console.py
 
