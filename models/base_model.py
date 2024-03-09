@@ -8,7 +8,7 @@ class BaseModel:
 
     """the base class"""
 
-    def __init__(self, *args, *kwargs):
+    def __init__(self, *args, **kwargs):
         """Initializing the instance attributes
 
         Args:
