@@ -3,6 +3,7 @@
 import datetime
 import json
 import os
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -22,10 +23,10 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to JSON file"""
-        odict = FileStorage.__objects
-        objdict = {obj: odict[obj].to_dict() for obj in odict.keys()}
+        objdict = FileStorage.__objects
+        odict = {obj: objdict[obj].to_dict() for obj in objdict.keys()}
         with open(FileStorage.__file_path, "w") as f:
-            json.dump(objdict, f)
+            json.dump(odict, f)
 
     def reload(self):
         """deserializes JSON file to __objects if exist"""
