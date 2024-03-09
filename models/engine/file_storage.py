@@ -2,7 +2,6 @@
 """file storage modules"""
 import datetime
 import json
-from models.base_model import BaseModel
 
 
 class FileStorage:
