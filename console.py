@@ -1,7 +1,10 @@
+#!/usr/bin/python3
+"""console madules"""
 import cmd
 import json
 import os
 from models.base_model import BaseModel
+
 
 class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
@@ -13,7 +16,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """Exit the program"""
-        print("^D")
+        print("")
         return True
 
     def emptyline(self):
