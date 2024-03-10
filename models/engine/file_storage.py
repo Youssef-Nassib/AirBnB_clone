@@ -23,8 +23,8 @@ class FileStorage:
     def save(self):
         """serializes __objects to JSON file"""
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
-            json.dump(d, f)
+            dt = {k: value.to_dict() for k, value in FileStorage.__objects.items()}
+            json.dump(dt, f)
 
     def reload(self):
         """deserializes JSON file to __objects if exist"""
@@ -34,7 +34,6 @@ class FileStorage:
             objct_dict = json.load(f)
             objct_dict = {k: self.classes()[v["__class__"]](**v)
                         for k, v in objct_dict.items()}
-            # TODO: should this overwrite or insert?
             FileStorage.__objects = objct_dict
 
     def classes(self):
