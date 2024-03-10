@@ -21,25 +21,23 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to JSON file"""
-        objdict = FileStorage.__objects
-        odict = {obj: objdict[obj].to_dict() for obj in objdict.keys()}
-        with open(FileStorage.__file_path, "w") as f:
-            json.dump(odict, f)
+        with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
+            d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+            json.dump(d, f)
 
     def reload(self):
         """deserializes JSON file to __objects if exist"""
-        try:
-            with open(FileStorage.__file_path) as f:
-                objdict = json.load(f)
-                for o in objdict.values():
-                    cls_name = o["__class__"]
-                    del o["__class__"]
-                    self.new(eval(cls_name)(**o))
-        except FileNotFoundError:
+        if not os.path.isfile(FileStorage.__file_path):
             return
+        with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
+            obj_dict = json.load(f)
+            obj_dict = {k: self.classes()[v["__class__"]](**v)
+                        for k, v in obj_dict.items()}
+            # TODO: should this overwrite or insert?
+            FileStorage.__objects = obj_dict
 
     def classes(self):
-        """Returns a dictionary of valid classes and their references"""
+        """classes method returns dictionary of valid classes and their reference"""
         from models.base_model import BaseModel
         from models.user import User
 
@@ -48,7 +46,7 @@ class FileStorage:
         return classes
 
     def attributes(self):
-        """Returns the valid attributes and their types for classname"""
+        """attributes method returns the valid attributes and their types for classname"""
         attributes = {
             "BaseModel":
                      {"id": str,
