@@ -94,7 +94,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        rex = r'^(\S+)(?:\s(\S+)(?:\s(\S+)(?:\s((?:"[^"]*")|(?:(\S)+)))?)?)?'
+        rex = r'^(\S+)(?:\s+(\S+)(?:\s+(\S+)(?:\s+(.*))?)?)?$'
         match = re.search(rex, arg)
         clsname = match.group(1)
         uid = match.group(2)
