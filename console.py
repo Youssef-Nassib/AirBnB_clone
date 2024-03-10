@@ -3,7 +3,7 @@
 import cmd
 from models.base_model import BaseModel
 import re
-from models import storage
+from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         elif uid is None:
             print("** instance id missing **")
         else:
-            k = "{}.{}".format(classname, uid)
+            k = "{}.{}".format(clsname, uid)
             if k not in storage.all():
                 print("** no instance found **")
             elif not attribute:
@@ -123,9 +123,9 @@ class HBNBCommand(cmd.Cmd):
                         cast = int
                 else:
                     value = value.replace('"', '')
-                attbs = storage.attbs()[classname]
+                attributes = storage.attributes()[classname]
                 if attribute in attbs:
-                    value = attbs[attribute](value)
+                    value = attributes[attribute](value)
                 elif cast:
                     try:
                         value = cast(value)
@@ -133,7 +133,6 @@ class HBNBCommand(cmd.Cmd):
                         pass
                 setattr(storage.all()[k], attribute, value)
                 storage.all()[k].save()
-
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
