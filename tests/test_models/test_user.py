@@ -19,22 +19,22 @@ class TestUser(unittest.TestCase):
         """Test case to ensure attributes can be assigned values"""
         self.user.email = "test@example.com"
         self.user.password = "password123"
-        self.user.first_name = "John"
-        self.user.last_name = "Doe"
+        self.user.first_name = "Hamza"
+        self.user.last_name = "Youssef"
 
         self.assertEqual(self.user.email, "test@example.com")
         self.assertEqual(self.user.password, "password123")
-        self.assertEqual(self.user.first_name, "John")
-        self.assertEqual(self.user.last_name, "Doe")
+        self.assertEqual(self.user.first_name, "Hamza")
+        self.assertEqual(self.user.last_name, "Youssef")
 
     def test_str_representation(self):
         """Test case to ensure str method returns the expected string"""
         self.user.email = "test@example.com"
         self.user.password = "password123"
-        self.user.first_name = "John"
-        self.user.last_name = "Doe"
+        self.user.first_name = "Hamza"
+        self.user.last_name = "Youssef"
         
-        expected_str = "<User: email='test@example.com', password='password123', first_name='John', last_name='Doe'>"
+        expected_str = "<User: email='test@example.com', password='password123', first_name='Hamza', last_name='Youssef'>"
         
         self.assertEqual(str(self.user), expected_str)
 
