@@ -2,7 +2,6 @@
 """file storage modules"""
 import datetime
 import json
-import os
 
 
 class FileStorage:
@@ -42,8 +41,10 @@ class FileStorage:
     def classes(self):
         """Returns a dictionary of classe and its reference"""
         from models.base_model import BaseModel
+        from models.user import User
 
-        classes = {"BaseModel": BaseModel}
+        classes = {"BaseModel": BaseModel,
+                   "User": User}
         return classes
 
     def attributes(self):
@@ -52,5 +53,11 @@ class FileStorage:
             "BaseModel":
                      {"id": str,
                       "created_at": datetime.datetime,
-                      "updated_at": datetime.datetime}}
+                      "updated_at": datetime.datetime}
+            "User":
+                     {"email": str,
+                      "password": str,
+                      "first_name": str,
+                      "last_name": str},
+        }
         return attributes
