@@ -9,24 +9,25 @@ import re
 
 class HBNBCommand(cmd.Cmd):
 
-    """Class for the command interpreter."""
+    """Class for the command interpreter
+
+    Attributes:
+        prompt (str): The command prompt
+    """
 
     prompt = "(hbnb) "
 
     def do_quit(self, arg):
-        """Exits the program.
-        """
+        """Exits the program"""
         return True
 
     def do_EOF(self, arg):
-        """Handles End Of File character.
-        """
+        """Handles End Of File character"""
         print()
         return True
 
     def emptyline(self):
-        """Doesn't do anything on ENTER.
-        """
+        """Doesn't do anything on ENTER"""
         pass
 
     def do_create(self, arg):
@@ -41,8 +42,7 @@ class HBNBCommand(cmd.Cmd):
             print(ob.id)
 
     def do_show(self, arg):
-        """Prints the string representation of an instance.
-        """
+        """Prints string representation of instance based on class name and id """
         if arg == "" or arg is None:
             print("** class name missing **")
         else:
@@ -59,8 +59,7 @@ class HBNBCommand(cmd.Cmd):
                     print(storage.all()[k])
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id.
-        """
+        """Deletes an instance based on the class name and id"""
         if arg == "" or arg is None:
             print("** class name missing **")
         else:
@@ -78,23 +77,21 @@ class HBNBCommand(cmd.Cmd):
                     storage.save()
 
     def do_all(self, arg):
-        """Prints all string representation of all instances.
-        """
+        """Prints all string representation of all instances"""
         if arg != "":
             string = arg.split(' ')
             if string[0] not in storage.classes():
                 print("** class doesn't exist **")
             else:
-                nl = [str(obj) for k, obj in storage.all().items()
+                doc = [str(obj) for k, obj in storage.all().items()
                       if type(obj).__name__ == string[0]]
-                print(nl)
+                print(doc)
         else:
-            new_list = [str(obj) for key, obj in storage.all().items()]
-            print(new_list)
+            str_list = [str(obj) for key, obj in storage.all().items()]
+            print(str_list)
 
     def do_update(self, arg):
-        """Updates an instance by adding or updating attribute.
-        """
+        """Updates an instance by adding or updating attribute"""
         if arg == "" or arg is None:
             print("** class name missing **")
             return
@@ -103,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
         match = re.search(rex, arg)
         clsname = match.group(1)
         uid = match.group(2)
-        attribute = match.group(3)
+        attb = match.group(3)
         value = match.group(4)
         if not match:
             print("** class name missing **")
@@ -115,28 +112,28 @@ class HBNBCommand(cmd.Cmd):
             k = "{}.{}".format(clsname, uid)
             if k not in storage.all():
                 print("** no instance found **")
-            elif not attribute:
+            elif not attb:
                 print("** attribute name missing **")
             elif not value:
                 print("** value missing **")
             else:
-                cast = None
+                typ = None
                 if not re.search('^".*"$', value):
                     if '.' in value:
-                        cast = float
+                        typ = float
                     else:
-                        cast = int
+                        typ = int
                 else:
                     value = value.replace('"', '')
                 attributes = storage.attributes()[clsname]
-                if attribute in attributes:
-                    value = attributes[attribute](value)
-                elif cast:
+                if attb in attributes:
+                    value = attributes[attb](value)
+                elif typ:
                     try:
-                        value = cast(value)
+                        value = typ(value)
                     except ValueError:
-                        pass  # fine, stay a string then
-                setattr(storage.all()[k], attribute, value)
+                        pass
+                setattr(storage.all()[k], attb, value)
                 storage.all()[k].save()
 
 if __name__ == '__main__':
