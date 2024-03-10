@@ -76,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Prints all string representation of all instances based or not on class name"""
-        if != '':
+        if arg != '':
             string = arg.split(' ')
             if string[0] not in storage.classes():
                 print("** class doesn't exist **")
@@ -123,8 +123,8 @@ class HBNBCommand(cmd.Cmd):
                         cast = int
                 else:
                     value = value.replace('"', '')
-                attributes = storage.attributes()[classname]
-                if attribute in attbs:
+                attributes = storage.attributes()[clsname]
+                if attribute in attributes:
                     value = attributes[attribute](value)
                 elif cast:
                     try:
