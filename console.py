@@ -4,7 +4,6 @@ import cmd
 from models.base_model import BaseModel
 import re
 from models import storage
-from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,7 +28,7 @@ class HBNBCommand(cmd.Cmd):
         """does nothing when empty line is inserted"""
         pass
 
-    def so_creat(self, arg):
+    def do_creat(self, arg):
         """creates new instance of BaseModel"""
         if arg == "" or arg is None:
             print("** class name missing **")
