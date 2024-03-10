@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """console module"""
 import cmd
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -12,7 +13,7 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb) "
 
-    def quit_cmd(self, arg):
+    def do_quit(self, arg):
         """function that quit command to exit program"""
         return True
 
@@ -21,8 +22,8 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def EmptyLine(self):
-        """do nothing when empty line is inserted"""
+    def emptyline(self):
+        """does nothing when empty line is inserted"""
         pass
 
 if __name__ == "__main__":
